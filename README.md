@@ -1,5 +1,6 @@
 # Egnarts94/JEM-Project Responsive JEM
 Forked from jemproject/JEM-Project
+Forked from egnarts/JEM-Project
 
 ## This version includes:
 - Import/Export view
@@ -40,3 +41,6 @@ After installation, go to your Backend->Components->JEM->Help->JEM Responsive, w
 
 ## Why do you use already module-class suffix?
 Because the default JEM does not support some settings of JEM-Responsive. And so, only expert users, that know what they do can change the behaviour of JEM Responsive.
+
+## Golf Club Functionality
+- Enhanced event registration (additional fields and ability to register other members, credit check and notifications)

@@ -84,6 +84,40 @@ class JemViewEvent extends JemView
 		$item   = $this->item;
 		$params = $this->params;
 
+		JForm::addFormPath(JPATH_SITE . '/components/com_jem/models/forms'); 
+		JForm::addFieldPath(JPATH_SITE . '/components/com_jem/models/fields'); 
+		$this->form = JForm::getInstance('register','register');
+		$this->form->setValue('tee_time', null, implode('|',array($item->times,$item->endtimes,$item->tee_time_interval)));
+		if ($item->use_tee_time) {
+			$this->form->setFieldAttribute('tee_time', 'required', 'required');
+		}
+		$js = "
+		jQuery(document).ready(function() {
+			jQuery('body').on('change', '#guest', function() {
+				jQuery('#guest_name').attr('required', (jQuery(this).val() == '1'));
+				jQuery('#guest_hcp').attr('required', (jQuery(this).val() == '1'));
+			});
+			jQuery('#guest').change();
+		});
+		";
+		$document->addScriptDeclaration($js);
+		
+		//additional players 2 - 4, tee times optional
+		for ($i = 2; $i <=4; $i++) {
+			$this->form->setValue('tee_time'.$i, null, implode('|',array($item->times,$item->endtimes,$item->tee_time_interval)));
+			$js = "
+			jQuery(document).ready(function() {
+				jQuery('body').on('change', '#guest".$i."', function() {
+					jQuery('#guest_name".$i."').attr('required', (jQuery(this).val() == '1'));
+					jQuery('#guest_hcp".$i."').attr('required', (jQuery(this).val() == '1'));
+				});
+				jQuery('#guest".$i."').change();  
+			});
+			";
+			$document->addScriptDeclaration($js);  
+		}
+
+
 		// Decide which parameters should take priority
 		$useMenuItemParams = ($menuitem && $menuitem->query['option'] == 'com_jem'
 		                                && $menuitem->query['view']   == 'event'
@@ -218,11 +252,15 @@ class JemViewEvent extends JemView
 		$e_dates = $item->dates;
 		$e_times = $item->times;
 		$e_hours = (int)$item->unregistra_until;
+		$e_showRegistered = $item->show_registered;
 
-		$this->showAttendees = (($g_reg == 1) || (($g_reg == 2) && ($e_reg & 1))) && ((!(($e_reg & 2) && ($g_inv > 0))) || (is_object($registration) || $isAuthor));
-		$this->showRegForm   = (($g_reg == 1) || (($g_reg == 2) && ($e_reg & 1))) && ((!(($e_reg & 2) && ($g_inv > 0))) || (is_object($registration)));
-
-		$this->allowAnnulation = ($e_unreg == 1) || (($e_unreg == 2) && (empty($e_dates) || (strtotime($e_dates.' '.$e_times.' -'.$e_hours.' hour') > strtotime('now'))));
+		$this->showAttendees = ($e_showRegistered) 
+			&& (($g_reg == 1) || (($g_reg == 2) && ($e_reg & 1))) 
+			&& ((!(($e_reg & 2) && ($g_inv > 0))) || (is_object($registration) || $isAuthor));
+		$this->showRegForm = (($g_reg == 1) || (($g_reg == 2) && ($e_reg & 1))) 
+			&& ((!(($e_reg & 2) && ($g_inv > 0))) || (is_object($registration)));
+		$this->allowAnnulation = ($e_unreg == 1) 
+			|| (($e_unreg == 2) && (empty($e_dates) || (strtotime($e_dates.' '.$e_times.' -'.$e_hours.' hour') > strtotime('now'))));
 
 		// Timecheck for registration
 		$now = strtotime(date("Y-m-d"));

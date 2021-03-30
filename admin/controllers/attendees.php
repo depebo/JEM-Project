@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version 2.2.2
  * @package JEM
@@ -30,7 +31,7 @@ class JemControllerAttendees extends JControllerLegacy
 		$this->registerTask('onWaitinglist',  'toggleStatus');
 		$this->registerTask('offWaitinglist', 'toggleStatus');
 
-		$this->registerTask('setNotAttending','setStatus');
+		$this->registerTask('setNotAttending', 'setStatus');
 		$this->registerTask('setAttending',   'setStatus');
 		$this->registerTask('setWaitinglist', 'setStatus');
 	}
@@ -131,7 +132,7 @@ class JemControllerAttendees extends JControllerLegacy
 			JPluginHelper::importPlugin('jem');
 			$dispatcher = JemFactory::getDispatcher();
 
-			foreach ($pks AS $pk) {
+			foreach ($pks as $pk) {
 				$model->setId($pk);
 				$attendee = $model->getData();
 				$res = $model->toggle();
@@ -207,57 +208,51 @@ class JemControllerAttendees extends JControllerLegacy
 		$task    = $this->getTask();
 		$value   = \Joomla\Utilities\ArrayHelper::getValue($values, $task, 0, 'int');
 
-		if (empty($ids))
-		{
+		if (empty($ids)) {
 			$message = JText::_('JERROR_NO_ITEMS_SELECTED');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($message, 'warning');
-		}
-		else
-		{
+		} else {
 			// Get the model.
 			$model = $this->getModel('attendee');
 
 			// Publish the items.
-			if (!$model->setStatus($ids, $value))
-			{
+			if (!$model->setStatus($ids, $value)) {
 				$message = $model->getError();
 				JemHelper::addLogEntry($message, __METHOD__, JLog::ERROR);
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage($message, 'warning');
-			}
-			else
-			{
+			} else {
 				JPluginHelper::importPlugin('jem');
 				$dispatcher = JemFactory::getDispatcher();
 
 				switch ($value) {
-				case -1:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_NOTATTENDING', count($ids));
-					foreach ($ids AS $pk) {
-						// onEventUserUnregistered($eventid, $record, $recordid)
-						$dispatcher->trigger('onEventUserUnregistered', array($eventid, false, $pk));
-					}
-					break;
-				case 0:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_INVITED', count($ids));
-					foreach ($ids AS $pk) {
-						// onEventUserRegistered($recordid)
-						$dispatcher->trigger('onEventUserRegistered', array($pk));
-					}
-					break;
-				case 1:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_ATTENDING', count($ids));
-					foreach ($ids AS $pk) {
-						// onEventUserRegistered($recordid)
-						$dispatcher->trigger('onEventUserRegistered', array($pk));
-					}
-					break;
-				case 2:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_WAITINGLIST', count($ids));
-					foreach ($ids AS $pk) {
-						// onUserOnOffWaitinglist($recordid)
-						$dispatcher->trigger('onUserOnOffWaitinglist', array($pk));
-					}
-					break;
+					case -1:
+						$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_NOTATTENDING', count($ids));
+						foreach ($ids as $pk) {
+							// onEventUserUnregistered($eventid, $record, $recordid)
+							$dispatcher->trigger('onEventUserUnregistered', array($eventid, false, $pk));
+						}
+						break;
+					case 0:
+						$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_INVITED', count($ids));
+						foreach ($ids as $pk) {
+							// onEventUserRegistered($recordid)
+							$dispatcher->trigger('onEventUserRegistered', array($pk));
+						}
+						break;
+					case 1:
+						$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_ATTENDING', count($ids));
+						foreach ($ids as $pk) {
+							// onEventUserRegistered($recordid)
+							$dispatcher->trigger('onEventUserRegistered', array($pk));
+						}
+						break;
+					case 2:
+						$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_WAITINGLIST', count($ids));
+						foreach ($ids as $pk) {
+							// onUserOnOffWaitinglist($recordid)
+							$dispatcher->trigger('onUserOnOffWaitinglist', array($pk));
+						}
+						break;
 				}
 
 				JemHelper::addLogEntry($message, __METHOD__, JLog::DEBUG);
@@ -265,5 +260,35 @@ class JemControllerAttendees extends JControllerLegacy
 		}
 
 		$this->setRedirect(JRoute::_('index.php?option=com_jem&view=attendees&eventid=' . $eventid, false), $message);
+	}
+
+	public function saveteetime()
+	{
+		try {
+			$jinput = JFactory::getApplication()->input;
+			$cid = $jinput->get('cid', 0, 'array');
+			$time = $jinput->get('tee_time', 0, 'array');
+			$model = $this->getModel('attendee');
+			$i = 0;
+			$updated = 0;
+			foreach ($cid as $reg_id) {
+				$model->setId($reg_id);
+				$attendee = $model->getData();
+				if (strtotime($attendee->tee_time) != (strtotime($time[$i]))) {
+					$attendee->tee_time = date(JText::_('COM_JEM_CLUB_TIME_FORMAT'), strtotime($time[$i]));
+					$model->update($attendee);
+					$updated += 1;
+				}
+				$i += 1;
+			}
+			if ($updated == 1) {
+				$msg = 'One tee times has been updated';
+			} elseif ($updated > 1) {
+				$msg = $updated . ' tee times have been updated';
+			}
+		} catch (Exception $e) {
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
+		}
+		$this->setRedirect(JRoute::_('index.php?option=com_jem&view=attendees&eventid=' . $attendee->event, false), $msg);
 	}
 }

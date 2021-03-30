@@ -137,35 +137,4 @@ $linkreg = 'index.php?option=com_jem&amp;view=attendees&amp;id='.$this->item->id
 		</dd>
 	<?php endif; ?>
 	</dl>
-
-	<?php if ($this->print == 0) : ?>
-	<dl class="jem-dl floattext">
-		<dt class="register registration hasTooltip" data-original-title="<?php echo JText::_('COM_JEM_YOUR_REGISTRATION'); ?>"><?php echo JText::_('COM_JEM_YOUR_REGISTRATION'); ?>:</dt>
-		<dd class="register registration">
-			<?php
-			if ($this->item->published != 1) {
-				echo JText::_('COM_JEM_WRONG_STATE_FOR_REGISTER');
-			} elseif (!$this->showRegForm) {
-				echo JText::_('COM_JEM_NOT_ALLOWED_TO_REGISTER');
-			} else {
-				switch ($this->formhandler) {
-				case 0:
-					echo JText::_('COM_JEM_TOO_LATE_UNREGISTER');
-					break;
-				case 1:
-					echo JText::_('COM_JEM_TOO_LATE_REGISTER');
-					break;
-				case 2:
-					echo JText::_('COM_JEM_LOGIN_FOR_REGISTER');
-					break;
-				case 3:
-				case 4:
-					echo $this->loadTemplate('regform');
-					break;
-				}
-			}
-			?>
-		</dd>
-	</dl>
-	<?php endif; ?>
 </div>

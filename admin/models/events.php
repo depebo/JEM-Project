@@ -33,6 +33,7 @@ class JemModelEvents extends JModelList
 					'id', 'a.id',
 					'catname', 'c.catname',
 					'featured', 'a.featured',
+					'registra', 'a.registra',
 					'access', 'a.access', 'access_level',
 			);
 		}
@@ -57,6 +58,9 @@ class JemModelEvents extends JModelList
 		$this->setState('filter_type', $filterfield);
 
 		$begin = $this->getUserStateFromRequest($this->context.'.filter_begin', 'filter_begin', '', 'string');
+		if ($begin == ''){
+			$begin = date('Y-m-d');
+		}
 		$this->setState('filter_begin', $begin);
 
 		$end = $this->getUserStateFromRequest($this->context.'.filter_end', 'filter_end', '', 'string');

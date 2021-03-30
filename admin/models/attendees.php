@@ -27,7 +27,7 @@ class JemModelAttendees extends JModelList
 			$config['filter_fields'] = array(
 					'u.name', 'u.username',
 					'r.uid', 'r.waiting',
-					'r.uregdate','r.id'
+					'r.uregdate','r.id', 'r.tee_time'
 			);
 		}
 
@@ -166,6 +166,7 @@ class JemModelAttendees extends JModelList
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array('id','title','dates','maxplaces','waitinglist'));
+		$query->select(array('times','endtimes','tee_time_interval_minutes','interval_desc_format'));
 		$query->from('#__jem_events');
 		$query->where('id = '.$db->Quote($this->eventid));
 		$db->setQuery( $query );

@@ -63,6 +63,10 @@ defined('_JEXEC') or die;
 						<td><?php echo JText::_('COM_JEM_MAIN_CONFIG_VS_GD').': '; ?></td>
 						<td colspan="3"><b><?php echo $this->config->vs_gd; ?> </b></td>
 					</tr>
+					<tr>
+						<td><?php echo JText::_('COM_JEM_GOLFCLUB').': '; ?></td>
+						<td colspan="3"><b>0.0.1</b></td>
+					</tr>
 				</table>
 		</fieldset>
 	</div>

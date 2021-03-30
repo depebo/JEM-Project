@@ -184,7 +184,7 @@ function showUnregistraUntil()
 	<?php endif; ?>
 
 	<!-- START OF LEFT DIV -->
-	<div class="width-55 fltlft">
+	<div class="width-60 fltlft">
 
 		<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
 		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
@@ -247,7 +247,7 @@ function showUnregistraUntil()
 	</div>
 
 	<!--  START RIGHT DIV -->
-	<div class="width-40 fltrt">
+	<div class="width-30 fltlft">
 
 		<!-- START OF SLIDERS -->
 		<?php echo JHtml::_('sliders.start', 'event-sliders-'.$this->item->id, $options); ?>
@@ -294,14 +294,32 @@ function showUnregistraUntil()
 				</li>
 				<li><?php echo $this->form->getLabel('maxplaces'); ?> <?php echo $this->form->getInput('maxplaces'); ?>
 				</li>
-				<li><label><?php echo JText::_ ('COM_JEM_BOOKED_PLACES') . ':';?></label><input id="event-booked" class="readonly inputbox" type="text" readonly="true" value="<?php echo $this->item->booked; ?>" />
+				<li><label><?php echo JText::_ ('COM_JEM_BOOKED_PLACES');?></label><input id="event-booked" class="readonly inputbox" type="text" readonly="true" value="<?php echo $this->item->booked; ?>" />
 				</li>
 				<?php if ($this->item->maxplaces): ?>
-				<li><label><?php echo JText::_ ('COM_JEM_AVAILABLE_PLACES') . ':';?></label><input id="event-available" class="readonly inputbox" type="text" readonly="true" value="<?php echo ($this->item->maxplaces-$this->item->booked); ?>" />
+				<li><label><?php echo JText::_ ('COM_JEM_AVAILABLE_PLACES');?></label><input id="event-available" class="readonly inputbox" type="text" readonly="true" value="<?php echo ($this->item->maxplaces-$this->item->booked); ?>" />
 				</li>
 				<?php endif; ?>
 				<li><?php echo $this->form->getLabel('waitinglist'); ?> <?php echo $this->form->getInput('waitinglist'); ?>
 				</li>
+				<li>
+					<?php echo $this->form->getLabel('entry_fee_amount'); ?> <?php echo $this->form->getInput('entry_fee_amount'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('drawn'); ?> <?php echo $this->form->getInput('drawn'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('tee_time_interval_minutes'); ?> <?php echo $this->form->getInput('tee_time_interval_minutes'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('interval_desc_format'); ?> <?php echo $this->form->getInput('interval_desc_format'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('group_size'); ?> <?php echo $this->form->getInput('group_size'); ?>
+				</li>
+				<li>
+					<?php echo $this->form->getLabel('show_registered'); ?> <?php echo $this->form->getInput('show_registered'); ?>
+				</li>								
 			</ul>
 		</fieldset>
 

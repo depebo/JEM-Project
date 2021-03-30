@@ -87,6 +87,7 @@ class JemModelAttendee extends JModelLegacy
 
 			$query = $db->getQuery(true);
 			$query->select(array('r.*','u.name AS username', 'a.title AS eventtitle', 'a.waitinglist'));
+			$query->select(array('a.drawn','a.tee_time_interval_minutes','a.interval_desc_format', 'a.times','a.endtimes'));
 			$query->from('#__jem_register as r');
 			$query->join('LEFT', '#__users AS u ON (u.id = r.uid)');
 			$query->join('LEFT', '#__jem_events AS a ON (a.id = r.event)');
@@ -125,6 +126,11 @@ class JemModelAttendee extends JModelLegacy
 				$table->load($eventid);
 				if (!empty($table->title)) {
 					$data->eventtitle = $table->title;
+					$data->drawn = $table->drawn;
+					$data->tee_time_interval_minutes = $table->tee_time_interval_minutes;
+					$data->times = $table->times;
+					$data->endtimes = $table->endtimes;
+					$data->interval_desc_format = $table->interval_desc_format;
 				}
 				$data->waitinglist = isset($table->waitinglist) ? $table->waitinglist : 0;
 			}
@@ -164,6 +170,7 @@ class JemModelAttendee extends JModelLegacy
 		$userid  = $data['uid'];
 		$id      = !empty($data['id']) ? (int)$data['id'] : 0;
 		$status  = isset($data['status']) ? $data['status'] : false;
+		$currentUser  = JFactory::getUser();
 
 		// Split status and waiting
 		if ($status !== false) {
@@ -186,6 +193,10 @@ class JemModelAttendee extends JModelLegacy
 		if (!$row->bind($data)) {
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_db->getErrorMsg(), 'error');
 			return false;
+		}
+		//set registered by user to current user if not set
+		if (empty($row->registered_by_uid)) {
+			$row->registered_by_uid = $currentUser->id;
 		}
 
 		// sanitise id field
@@ -326,4 +337,17 @@ class JemModelAttendee extends JModelLegacy
 	//	JemHelper::addLogEntry("Registration status of record(s) ".implode(', ', $pks)." set to $value", __METHOD__, JLog::DEBUG);
 		return true;
 	}
+
+	function update($data)
+	{
+		$data->id = (int)$data->id;
+		$row = $this->getTable('jem_register', '');
+		$row->bind($data);
+		if (!$row->store()) {
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_db->getErrorMsg(), 'error');
+			return false;
+		}
+		return $row;            
+	}
+
 }

@@ -1716,4 +1716,60 @@ class JemHelper
 	{
 		return (strpos($masterstring, $string) !== false);
 	}
+
+	/**
+	 * This method returns array of option pairs ready for arapping into select element
+	 *
+	 * @param  string  $start time
+	 * @param  string  $end time
+	 * @param  integer $interval in minutes, from start time, if 1 is used then label will be prefixed to the minutes
+	 * @param  string  $seltime time that will be selected in drop down box
+	 * @param  string  $label optional prefix to be used in social events
+	 * @return array
+	 */
+	static public function GetTimeOptions($start, $end, $interval, $seltime, $label = 'Group') {
+        if (empty($start)) $start = '06:00:00';
+        if (empty($interval)) $interval = 9;
+        $social = ($interval == 1);
+        if (empty($end)) $end = '12:00:00';
+        $timelist = array();
+        $timelist[0] = JHtml::_('select.option', '', '');
+        $tStart = strtotime($start);
+        $tEnd = strtotime($end);
+        $tNow = $tStart;
+        $selected = date(JText::_('COM_JEM_CLUB_TIME_FORMAT'), strtotime($seltime));
+        $i = 0;
+        while ($tNow <= $tEnd) {
+            $now = date(JText::_('COM_JEM_CLUB_TIME_FORMAT'), $tNow);
+            $text = ($social ? $label . ' ' . date('i',$tNow) : $now);
+            if ($selected == $now) {
+                $timelist[] = JHtml::_('select.option', $now, $text, $selected);
+            } else {
+                $timelist[] = JHtml::_('select.option', $now, $text);
+            }
+            $tNow = strtotime('+' . $interval . ' minutes', $tNow);
+            if ($i > 60) {
+                break;
+            }
+            $i += 1;
+        }
+        return $timelist;
+    }
+
+	/**
+	 * This method returns html code for option box showing list of available options
+	 *
+	 * @param  string  $start
+	 * @param  string  $end
+	 * @param  integer $interval
+	 * @param  string  $seltime
+	 * @param  string  $name
+	 * @return string
+	 */	
+	static function GetTeeTimeSelect($start='06:00:00', $end='12:00:00', $interval=9, $seltime='06:09:00', $name='tee_time[]', $label = 'Group') {
+        $class = array('class' => 'inputbox'); //TODO
+        $selected = date(JText::_('COM_JEM_CLUB_TIME_FORMAT'), strtotime($seltime));
+        $timelist = self::GetTimeOptions($start, $end, $interval, 'set-on-the-command-line', $label);
+        return JHtml::_('select.genericlist', $timelist, $name, $class, 'value', 'text', $selected);
+    }
 }

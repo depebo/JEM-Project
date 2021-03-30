@@ -58,6 +58,7 @@
 				<option value="0">JNO</option>
 				<option value="1">COM_JEM_SHOW_OPENDATES_TOO</option>
 				<option value="2">COM_JEM_SHOW_OPENDATES_ONLY</option>
+				<option value="3">COM_JEM_SHOW_FUTUREDATES_ONLY</option>
 			</field>
 			<field type="spacer" name="spacer3" hr="true" />
 			<field name="footertext" type="footertext"

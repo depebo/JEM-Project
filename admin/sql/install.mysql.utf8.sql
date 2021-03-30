@@ -51,6 +51,13 @@ CREATE TABLE IF NOT EXISTS `#__jem_events` (
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `attribs` varchar(5120) NOT NULL,
   `language` char(7) NOT NULL,
+  `drawn` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'club',
+  `tee_time_interval_minutes` tinyint(1) NOT NULL DEFAULT '9' COMMENT 'club',
+  `interval_desc_format` VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'club',
+  `group_size` tinyint(1) NOT NULL DEFAULT '4' COMMENT 'club',
+  `show_registered` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'club',
+  `entry_fee_amount` double DEFAULT NULL COMMENT 'club',
+  `twos_fee_amount` double DEFAULT NULL COMMENT 'club',
   PRIMARY KEY (`id`),
   KEY `idx_venue` (`locid`),
   KEY `idx_access` (`access`),
@@ -162,11 +169,20 @@ CREATE TABLE IF NOT EXISTS `#__jem_register` (
   `waiting` tinyint(1) NOT NULL default '0',
   `status` tinyint(3) NOT NULL default '1',
   `comment` varchar(255) DEFAULT '',
+  `preferred_start` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'club',
+  `buggy` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'club',
+  `tee_time` time DEFAULT NULL COMMENT 'club',
+  `guest` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'club',
+  `guest_name` tinytext COMMENT 'club',
+  `guest_handicap` double DEFAULT NULL COMMENT 'club',
+  `twos` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'club',
+  `registered_by_uid` int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'club'
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_user_event` (`uid`,`event`),
   KEY `idx_event` (`event`),
   KEY `idx_event_status` (`event`,`status`),
-  KEY `idx_user` (`uid`)
+  KEY `idx_user` (`uid`),
+  KEY `idx_event_uid` (`event`,`uid`),
 ) ENGINE=MyISAM CHARACTER SET `utf8` COLLATE `utf8_general_ci`;
 
 CREATE TABLE IF NOT EXISTS `#__jem_groups` (

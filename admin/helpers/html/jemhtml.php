@@ -268,4 +268,37 @@ abstract class JHtmlJemHtml
 
 		return $html;
 	}
+	/**
+	 *
+	 * @param int $value state value
+	 * @param int $i
+	 */
+	static public function registra($value = 0, $i, $canChange = true)
+	{
+		// Array of image, iconfont, task, title, action
+		$states = array(
+				0 => array(
+						'unpublish.png',
+						'fa-unpublish',
+						'events.registra',
+						'COM_JEM_EVENTS_REGISTRATION_CLOSED',
+						'COM_JEM_EVENTS_TOGGLE_TO_OPEN_REGISTRATION'
+				),
+				1 => array(
+						'tick.png',
+						'fa-tick',
+						'events.closeregistration',
+						'COM_JEM_EVENTS_REGISTRATION_OPEN',
+						'COM_JEM_EVENTS_TOGGLE_TO_CLOSE_REGISTRATION'
+				)
+		);
+		$state = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
+		$no_iconfont = (bool)JFactory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
+		$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-registra-'.$state[1], $state[3], null, $no_iconfont);
+		if ($canChange) {
+			$html = '<a href="#" onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')" title="' . JText::_($state[4]) . '">' . $html . '</a>';
+		}
+
+		return $html;
+	}
 }

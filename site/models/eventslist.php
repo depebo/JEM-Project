@@ -362,6 +362,9 @@ class JemModelEventslist extends JModelList
 		case 2: // show only events without startdate
 			$query->where('a.dates IS NULL');
 			break;
+		case 3: // show only future events
+			$query->where('a.dates >= '. $db->quote(date("Y-m-d")));
+			break;
 		}
 
 		#####################

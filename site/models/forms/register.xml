@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><form>
+    <fieldset name="club">
+        <field description="COM_JEM_CLUB_REGISTATION_PLAYER" label="COM_JEM_CLUB_REGISTATION_PLAYER" name="player" required="true" size="40" type="modal_user" validate="true"/>
+        <field class="inputbox" cols="40" description="COM_JEM_CLUB_REGISTATION_COMMENT_DESC" label="COM_JEM_CLUB_REGISTATION_COMMENT" name="comment" readonly="false" rows="3" type="textarea"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_BUGGY" label="COM_JEM_CLUB_REGISTATION_BUGGY" name="buggy" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_GUEST_DESC" label="COM_JEM_CLUB_REGISTATION_GUEST" name="guest" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field default="0" description="COM_JEM_CLUB_REGISTATION_PREFERRED_START" label="COM_JEM_CLUB_REGISTATION_PREFERRED_START" name="preferred_start" type="list">
+            <option value="0">COM_JEM_CLUB_REGISTATION_PREFERRED_START_0</option>
+            <option value="1">COM_JEM_CLUB_REGISTATION_PREFERRED_START_1</option>
+            <option value="2">COM_JEM_CLUB_REGISTATION_PREFERRED_START_2</option>
+            <option value="3">COM_JEM_CLUB_REGISTATION_PREFERRED_START_3</option>
+        </field>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_NAME" label="COM_JEM_CLUB_REGISTATION_GUEST_NAME" name="guest_name" readonly="false" showon="guest:1" size="40" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_HCP" label="COM_JEM_CLUB_REGISTATION_GUEST_HCP" name="guest_hcp" readonly="false" showon="guest:1" size="5" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_TEE_TIME" label="COM_JEM_CLUB_REGISTATION_TEE_TIME" name="tee_time" readonly="false" type="teetimeoptions"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_TWOS_DESC" label="COM_JEM_CLUB_REGISTATION_TWOS_LABEL" name="twos" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+    <fieldset name="club2">
+        <field description="COM_JEM_CLUB_REGISTATION_PLAYER" label="COM_JEM_CLUB_REGISTATION_PLAYER" name="player2" required="false" size="40" type="modal_user" validate="true"/>
+        <field class="inputbox" cols="40" description="COM_JEM_CLUB_REGISTATION_COMMENT_DESC" label="COM_JEM_CLUB_REGISTATION_COMMENT" name="comment2" readonly="false" rows="3" type="textarea"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_BUGGY" label="COM_JEM_CLUB_REGISTATION_BUGGY" name="buggy2" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_GUEST_DESC" label="COM_JEM_CLUB_REGISTATION_GUEST" name="guest2" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field default="0" description="COM_JEM_CLUB_REGISTATION_PREFERRED_START" label="COM_JEM_CLUB_REGISTATION_PREFERRED_START" name="preferred_start2" type="list">
+            <option value="0">COM_JEM_CLUB_REGISTATION_PREFERRED_START_0</option>
+            <option value="1">COM_JEM_CLUB_REGISTATION_PREFERRED_START_1</option>
+            <option value="2">COM_JEM_CLUB_REGISTATION_PREFERRED_START_2</option>
+            <option value="3">COM_JEM_CLUB_REGISTATION_PREFERRED_START_3</option>
+        </field>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_NAME" label="COM_JEM_CLUB_REGISTATION_GUEST_NAME" name="guest_name2" readonly="false" showon="guest2:1" size="40" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_HCP" label="COM_JEM_CLUB_REGISTATION_GUEST_HCP" name="guest_hcp2" readonly="false" showon="guest2:1" size="5" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_TEE_TIME" label="COM_JEM_CLUB_REGISTATION_TEE_TIME" name="tee_time2" readonly="false" type="teetimeoptions"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_TWOS_DESC" label="COM_JEM_CLUB_REGISTATION_TWOS_LABEL" name="twos2" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>    
+    </fieldset>
+    <fieldset name="club3">
+        <field description="COM_JEM_CLUB_REGISTATION_PLAYER" label="COM_JEM_CLUB_REGISTATION_PLAYER" name="player3" required="false" size="40" type="modal_user" validate="true"/>
+        <field class="inputbox" cols="40" description="COM_JEM_CLUB_REGISTATION_COMMENT_DESC" label="COM_JEM_CLUB_REGISTATION_COMMENT" name="comment3" readonly="false" rows="3" type="textarea"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_BUGGY" label="COM_JEM_CLUB_REGISTATION_BUGGY" name="buggy3" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_GUEST_DESC" label="COM_JEM_CLUB_REGISTATION_GUEST" name="guest3" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field default="0" description="COM_JEM_CLUB_REGISTATION_PREFERRED_START" label="COM_JEM_CLUB_REGISTATION_PREFERRED_START" name="preferred_start3" type="list">
+            <option value="0">COM_JEM_CLUB_REGISTATION_PREFERRED_START_0</option>
+            <option value="1">COM_JEM_CLUB_REGISTATION_PREFERRED_START_1</option>
+            <option value="2">COM_JEM_CLUB_REGISTATION_PREFERRED_START_2</option>
+            <option value="3">COM_JEM_CLUB_REGISTATION_PREFERRED_START_3</option>
+        </field>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_NAME" label="COM_JEM_CLUB_REGISTATION_GUEST_NAME" name="guest_name3" readonly="false" showon="guest3:1" size="40" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_HCP" label="COM_JEM_CLUB_REGISTATION_GUEST_HCP" name="guest_hcp3" readonly="false" showon="guest3:1" size="5" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_TEE_TIME" label="COM_JEM_CLUB_REGISTATION_TEE_TIME" name="tee_time3" readonly="false" type="teetimeoptions"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_TWOS_DESC" label="COM_JEM_CLUB_REGISTATION_TWOS_LABEL" name="twos3" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>    
+    </fieldset>
+    <fieldset name="club4">
+        <field description="COM_JEM_CLUB_REGISTATION_PLAYER" label="COM_JEM_CLUB_REGISTATION_PLAYER" name="player4" required="false" size="40" type="modal_user" validate="true"/>
+        <field class="inputbox" cols="40" description="COM_JEM_CLUB_REGISTATION_COMMENT_DESC" label="COM_JEM_CLUB_REGISTATION_COMMENT" name="comment4" readonly="false" rows="3" type="textarea"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_BUGGY" label="COM_JEM_CLUB_REGISTATION_BUGGY" name="buggy4" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_GUEST_DESC" label="COM_JEM_CLUB_REGISTATION_GUEST" name="guest4" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field default="0" description="COM_JEM_CLUB_REGISTATION_PREFERRED_START" label="COM_JEM_CLUB_REGISTATION_PREFERRED_START" name="preferred_start4" type="list">
+            <option value="0">COM_JEM_CLUB_REGISTATION_PREFERRED_START_0</option>
+            <option value="1">COM_JEM_CLUB_REGISTATION_PREFERRED_START_1</option>
+            <option value="2">COM_JEM_CLUB_REGISTATION_PREFERRED_START_2</option>
+            <option value="3">COM_JEM_CLUB_REGISTATION_PREFERRED_START_3</option>
+        </field>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_NAME" label="COM_JEM_CLUB_REGISTATION_GUEST_NAME" name="guest_name4" readonly="false" showon="guest4:1" size="40" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_GUEST_HCP" label="COM_JEM_CLUB_REGISTATION_GUEST_HCP" name="guest_hcp4" readonly="false" showon="guest4:1" size="5" type="text"/>
+        <field class="inputbox" description="COM_JEM_CLUB_REGISTATION_TEE_TIME" label="COM_JEM_CLUB_REGISTATION_TEE_TIME" name="tee_time4" readonly="false" type="teetimeoptions"/>
+        <field class="inputbox" default="0" description="COM_JEM_CLUB_REGISTATION_TWOS_DESC" label="COM_JEM_CLUB_REGISTATION_TWOS_LABEL" name="twos4" type="list">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>    
+    </fieldset>
+</form>

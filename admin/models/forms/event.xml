@@ -319,6 +319,57 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
+		<field name="drawn" type="radio"
+			   class="inputbox btn-group btn-group-yesno"
+			   label="COM_JEM_EVENT_DRAWN"
+			   description="COM_JEM_EVENT_DRAWN_DESC"
+			   default="1"
+		>
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="entry_fee_amount" type="number"
+			   size="4"
+			   class="inputbox"
+			   label="COM_JEM_EVENT_ENTRY_FEE_AMOUNT"
+			   description="COM_JEM_EVENT_ENTRY_FEE_AMOUNT_DESC"
+			   filter="decimal"
+			   format="%0.2f"
+			   min="0"
+		/>
+		<field name="tee_time_interval_minutes" type="number"
+			size="4"
+			class="integer"
+			label="COM_JEM_EVENT_TEE_TIME_INTERVAL"
+			description="COM_JEM_EVENT_TEE_TIME_INTERVAL_DESC"
+			filter="integer"
+			min="1"
+			max="15"
+		/>
+		<field name="interval_desc_format" type="text"
+			   size="20"
+			   class="inputbox"
+			   label="COM_JEM_EVENT_INTERVAL_FORMAT"
+			   description="COM_JEM_EVENT_INTERVAL_FORMAT_DESC"
+		/>
+		<field name="group_size" type="number"
+			size="4"
+			class="integer"
+			label="COM_JEM_EVENT_GROUP_SIZE"
+			description="COM_JEM_EVENT_GROUP_SIZE_DESC"
+			filter="integer"
+			min="1"
+			max="20"
+		/>		
+		<field name="show_registered" type="radio"
+			   class="inputbox btn-group btn-group-yesno"
+			   label="COM_JEM_EVENT_SHOW_REGISTERED"
+			   description="COM_JEM_EVENT_SHOW_REGISTERED_DESC"
+			   default="1"
+		>
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
 	</fieldset>
 
 	<fieldset name="recurrence"

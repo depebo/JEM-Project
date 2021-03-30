@@ -399,12 +399,19 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 	</div>
 	<?php endif; ?>
 
-	<!-- Registration -->
-	<?php if ($this->showAttendees) : ?>
+	<!-- Attendance -->
+
+	  <hr class="jem-hr">
+		<h2 class="register"><?php echo JText::_('COM_JEM_ATTENDANCE'); ?></h2>
+		<?php echo $this->loadTemplate('attendees'); ?>
+
+
+  <!-- Registration -->
+
 		<hr class="jem-hr">
 		<h2 class="register"><?php echo JText::_('COM_JEM_REGISTRATION'); ?></h2>
-		<?php echo $this->loadTemplate('attendees'); ?>
-	<?php endif; ?>
+		<?php echo $this->loadTemplate('registration'); ?>
+
 
 	<?php if (!empty($this->item->pluginevent->onEventEnd)) : ?>
 		<hr class="jem-hr">

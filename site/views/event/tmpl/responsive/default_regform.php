@@ -61,14 +61,12 @@ if ($this->showRegForm && empty($this->print)) :
       <?php endif; ?>
       </li>
       
+      
       <?php if (!empty($this->jemsettings->regallowcomments)) : ?>
         <li class="jem-event jem-nopointer jem-nohover">
           <p><?php echo JText::_('COM_JEM_OPTIONAL_COMMENT') . ':'; ?></p>
           <div class="jem-regcomment">
-            <textarea class="inputbox" name="reg_comment" id="reg_comment" rows="3" cols="30" maxlength="255"
-              ><?php if (is_object($this->registration) && !empty($this->registration->comment)) { echo $this->registration->comment; }
-              /* looks crazy, but required to prevent unwanted white spaces within textarea content! */
-            ?></textarea>
+            <textarea class="inputbox" name="reg_comment" id="reg_comment" rows="3" cols="30" maxlength="255"><?php if (is_object($this->registration) && !empty($this->registration->comment)) { echo $this->registration->comment; }?></textarea>
           </div>
         </li>      
       <?php endif; ?>

@@ -32,6 +32,52 @@ class JemControllerEvents extends JControllerAdmin
 		parent::__construct($config);
 
 		$this->registerTask('unfeatured', 'featured');
+		$this->registerTask('closeregistration', 'registra');
+	}
+	/**
+	 * Method to toggle the registration setting of a list of events.
+	 *
+	 * @return void
+	 * @since  1.6
+	 */
+	public function registra()
+	{
+		// Check for request forgeries
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Initialise variables.
+		$user   = JemFactory::getUser();
+		$ids    = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$values = array('registra' => 1, 'closeregistration' => 0);
+		$task   = $this->getTask();
+		$value  = \Joomla\Utilities\ArrayHelper::getValue($values, $task, 0, 'int');
+
+		$glob_auth = $user->can('publish', 'event'); // general permission for all events
+
+		// Access checks.
+		foreach ($ids as $i => $id)
+		{
+			if (!$glob_auth && !$user->can('publish', 'event', (int)$id)) {
+				// Prune items that you can't change.
+				unset($ids[$i]);
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), 'notice');
+			}
+		}
+
+		if (empty($ids)) {
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_NO_ITEMS_SELECTED'), 'warning');
+		}
+		else {
+			// Get the model.
+			$model = $this->getModel();
+
+			// Publish the items.
+			if (!$model->registra($ids, $value)) {
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage($model->getError(), 'warning');
+			}
+		}
+
+		$this->setRedirect('index.php?option=com_jem&view=events');
 	}
 
 	/**

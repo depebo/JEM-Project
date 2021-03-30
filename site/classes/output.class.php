@@ -919,11 +919,11 @@ class JemOutput
 
 				# do we have a client-ID?
 				if ($clientid) {
-					$document->addScript('https://maps.googleapis.com/maps/api/js?client='.$clientid.'&sensor=false&v=3.15');
+					$document->addScript('https://maps.googleapis.com/maps/api/js?client='.$clientid.'&v=3.15');
 				} else {
 					# do we have an api-key?
 					if ($api) {
-						$document->addScript('https://maps.googleapis.com/maps/api/js?key='.$api.'&sensor=false');
+						$document->addScript('https://maps.googleapis.com/maps/api/js?key='.$api);
 					} else {
 						$document->addScript('https://maps.googleapis.com/maps/api/js?sensor=false');
 					}

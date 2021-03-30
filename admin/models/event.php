@@ -600,4 +600,44 @@ class JemModelEvent extends JemModelAdmin
 
 		return true;
 	}
+	/**
+	 * Method to toggle registraton opening and closing.
+	 *
+	 * @param  array   The ids of the items to toggle.
+	 * @param  int     The value to toggle to.
+	 *
+	 * @return boolean True on success.
+	 */
+	public function registra($pks, $value = 0)
+	{
+		// Sanitize the ids.
+		$pks = (array)$pks;
+		\Joomla\Utilities\ArrayHelper::toInteger($pks);
+
+		if (empty($pks)) {
+			$this->setError(JText::_('COM_JEM_EVENTS_NO_ITEM_SELECTED'));
+			return false;
+		}
+
+		try {
+			$db = $this->getDbo();
+
+			$db->setQuery(
+					'UPDATE #__jem_events' .
+					' SET registra = '.(int) $value.', unregistra = '.(int) $value.
+					' WHERE id IN ('.implode(',', $pks).')'
+			);
+			if ($db->execute() === false) {
+				throw new Exception($db->getErrorMsg());
+			}
+
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+			return false;
+		}
+
+		$this->cleanCache();
+
+		return true;
+	}
 }
